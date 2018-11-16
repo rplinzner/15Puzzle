@@ -1,4 +1,5 @@
-﻿using Data;
+﻿using System;
+using Data;
 using System.Collections.Generic;
 
 namespace Solvers
@@ -46,6 +47,11 @@ namespace Solvers
                     possibleMove, NodeInProcessing, NodeInProcessing.DepthLevel);
                 AddNode(newNode);
             }
+        }
+
+        private void Solve()
+        {
+            throw new NotImplementedException();
         }
 
         protected abstract bool IsMovePossible();
