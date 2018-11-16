@@ -7,8 +7,8 @@ namespace Solvers
     {
         #region props
 
-        public byte X { get; set; }
-        public byte Y { get; set; }
+        public byte DimX { get; set; }
+        public byte DimY { get; set; }
         public Node InitialNode { get; set; }
         public Node NodeInProcessing { get; set; }
         public string InfoFilePath { get; set; }
@@ -20,11 +20,11 @@ namespace Solvers
 
         public SolverBase(NodeDTO startNodeDto, WritePathDTO writePaths)
         {
-            X = startNodeDto.X;
-            Y = startNodeDto.Y;
+            DimX = startNodeDto.X;
+            DimY = startNodeDto.Y;
             SolutionFilePath = writePaths.SolutionFilePath;
             InfoFilePath = writePaths.InfoFilePath;
-            InitialNode = new Node(X, Y, startNodeDto.Board, MoveEnum.N, null, 0);
+            InitialNode = new Node(DimX, DimY, startNodeDto.Board, MoveEnum.N, null, 0);
             NodeInProcessing = InitialNode;
         }
 
@@ -42,7 +42,7 @@ namespace Solvers
             List<MoveEnum> possibleMoves = GetPossibleMoves();
             foreach (var possibleMove in possibleMoves)
             {
-                Node newNode = new Node(X, Y, NodeInProcessing.MoveEmptyPiece(possibleMove),
+                Node newNode = new Node(DimX, DimY, NodeInProcessing.MoveEmptyTile(possibleMove),
                     possibleMove, NodeInProcessing, NodeInProcessing.DepthLevel);
                 AddNode(newNode);
             }
