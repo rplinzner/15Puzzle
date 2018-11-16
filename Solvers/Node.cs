@@ -29,7 +29,6 @@ namespace Solvers
 
         }
         #endregion
-
         #region Methods
 
         public int GetBlankPiece()

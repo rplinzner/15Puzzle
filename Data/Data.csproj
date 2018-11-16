@@ -41,9 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NodeDTO.cs" />
+    <Compile Include="DTO\NodeDTO.cs" />
     <Compile Include="DataReader.cs" />
-    <Compile Include="WritePathDTO.cs" />
+    <Compile Include="DTO\WritePathDTO.cs" />
     <Compile Include="SolutionInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

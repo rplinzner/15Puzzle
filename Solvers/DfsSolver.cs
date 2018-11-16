@@ -11,12 +11,17 @@ namespace Solvers
         private const int MaxDepth = 20;
         #endregion
 
-        public DfsSolver(string moveOrder, NodeDTO startNodeDto, WritePathDTO writePaths) : base(startNodeDto, writePaths)
+        #region ctor
+        public DfsSolver(string moveOrder, NodeDTO startNodeDto, WritePathDTO writePaths) : 
+            base(startNodeDto, writePaths)
         {
             MoveOrder = SolverHelp.ConvertStringMovesToEnums(moveOrder);
             MoveOrder.Reverse();
             AddNode(InitialNode);
         }
+        #endregion
+
+        #region Overrided methods
 
         protected override bool IsMovePossible()
         {
@@ -42,5 +47,8 @@ namespace Solvers
         {
             return Nodes.Count;
         }
+
+        #endregion
+        
     }
 }

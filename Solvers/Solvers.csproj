@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Priority Queue, Version=4.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OptimizedPriorityQueue.4.1.1\lib\net45\Priority Queue.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,10 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\AStarHeuresticEnum.cs" />
+    <Compile Include="AStarSolver.cs" />
     <Compile Include="BfsSolver.cs" />
     <Compile Include="DfsSolver.cs" />
     <Compile Include="SolverBase.cs" />
-    <Compile Include="MoveEnum.cs" />
+    <Compile Include="Enums\MoveEnum.cs" />
     <Compile Include="Node.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SolverHelp.cs" />
@@ -54,6 +59,9 @@
       <Project>{a50d1173-7882-4aef-b505-54195465d2f1}</Project>
       <Name>Data</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
