@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BfsSolver.cs" />
+    <Compile Include="DfsSolver.cs" />
     <Compile Include="SolverBase.cs" />
     <Compile Include="MoveEnum.cs" />
     <Compile Include="Node.cs" />
