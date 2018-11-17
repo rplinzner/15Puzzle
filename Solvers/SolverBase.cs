@@ -1,6 +1,7 @@
 ﻿using System;
 using Data;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Solvers
 {
@@ -14,7 +15,9 @@ namespace Solvers
         public Node NodeInProcessing { get; set; }
         public string InfoFilePath { get; set; }
         public string SolutionFilePath { get; set; }
-
+        public int Visited { get; set; }
+        public Dictionary<string, int> Explored { get; set; }
+        public int MaxDepth { get; set; }
         #endregion
 
         #region ctor
@@ -27,6 +30,8 @@ namespace Solvers
             InfoFilePath = writePaths.InfoFilePath;
             InitialNode = new Node(DimX, DimY, startNodeDto.Board, MoveEnum.N, null, 0);
             NodeInProcessing = InitialNode;
+            Explored = new Dictionary<string, int>();
+            Visited = 1;
         }
 
         #endregion
@@ -49,9 +54,50 @@ namespace Solvers
             }
         }
 
-        private void Solve()
+        public void Solve()
         {
-            throw new NotImplementedException();
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            int visited = 0;
+            Console.WriteLine("Zaczynam obliczenia");
+            while (GetNodesInContainer() > 0)
+            {
+
+                NodeInProcessing = GetNode();
+
+                if (!Explored.ContainsKey(NodeInProcessing.ToString()))
+                {
+                    Explored.Add(NodeInProcessing.ToString(), NodeInProcessing.DepthLevel);
+                }
+                else if (NodeInProcessing.DepthLevel < Explored[NodeInProcessing.ToString()])
+                {
+                    Explored[NodeInProcessing.ToString()] = NodeInProcessing.DepthLevel;
+                }
+
+                MaxDepth = NodeInProcessing.DepthLevel > MaxDepth ? NodeInProcessing.DepthLevel : MaxDepth;
+                visited++;
+
+                //Check if state is solved, if its solved Write info to the file
+                if (NodeInProcessing.IsSolved())
+                {
+                    stopwatch.Stop();
+
+                    SolutionInfo.SolutionLength = NodeInProcessing.DepthLevel;
+                    SolutionInfo.StatesVisited = NodeInProcessing.GetSolutionPath();
+                    SolutionInfo.StatesProcessed = Visited;
+                    SolutionInfo.DeepestRecursionReached = Explored.Count;
+                    SolutionInfo.ProcessingTime = stopwatch.Elapsed.TotalMilliseconds;
+
+                    DataWriter.WriteSolutionToFile(SolutionFilePath);
+
+                    DataWriter.WriteInfoToFile(InfoFilePath);
+
+                    Console.WriteLine("Done!");
+                    return;
+                }
+
+                AddChildren();
+            }
         }
 
         protected abstract bool IsMovePossible();

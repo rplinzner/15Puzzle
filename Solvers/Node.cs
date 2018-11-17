@@ -101,7 +101,7 @@ namespace Solvers
                 Swap(ref board[BlankTileIndex - DimX], ref board[BlankTileIndex]);
             }
 
-            if (move == MoveEnum.U)
+            if (move == MoveEnum.D)
             {
                 Swap(ref board[BlankTileIndex + DimX], ref board[BlankTileIndex]);
             }
