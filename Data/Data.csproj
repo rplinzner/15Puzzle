@@ -41,7 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataWriter.cs" />
     <Compile Include="DTO\NodeDTO.cs" />
     <Compile Include="DataReader.cs" />
     <Compile Include="DTO\WritePathDTO.cs" />

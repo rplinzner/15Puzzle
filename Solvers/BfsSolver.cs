@@ -8,7 +8,7 @@ namespace Solvers
         #region prop & field
         public Queue<Node> Nodes = new Queue<Node>();
         public List<MoveEnum> MoveOrder { get; set; }
-        #endregion
+#endregion
 
         #region ctor
 
