@@ -2,7 +2,7 @@
 
 namespace Data
 {
-    public class DataReader
+    public static class DataReader
     {
         public static NodeDTO ReadFirstNode(string filepath)
         {

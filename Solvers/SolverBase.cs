@@ -1,6 +1,6 @@
-﻿using System;
-using Data;
+﻿using Data;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Solvers
 {
@@ -12,8 +12,12 @@ namespace Solvers
         public byte DimY { get; set; }
         public Node InitialNode { get; set; }
         public Node NodeInProcessing { get; set; }
-        public string InfoFilePath { get; set; }
-        public string SolutionFilePath { get; set; }
+        /*public string InfoFilePath { get; set; }
+        public string SolutionFilePath { get; set; }*/
+        public WritePathDTO WritePaths { get; set; }
+        public int VisitedStates { get; set; }
+        public Dictionary<string, int> ExploredStates { get; set; }
+        public int DeepestRecursion { get; set; }
 
         #endregion
 
@@ -23,10 +27,13 @@ namespace Solvers
         {
             DimX = startNodeDto.X;
             DimY = startNodeDto.Y;
-            SolutionFilePath = writePaths.SolutionFilePath;
-            InfoFilePath = writePaths.InfoFilePath;
+            /*SolutionFilePath = writePaths.SolutionFilePath;
+            InfoFilePath = writePaths.InfoFilePath;*/
+            WritePaths = writePaths;
             InitialNode = new Node(DimX, DimY, startNodeDto.Board, MoveEnum.N, null, 0);
             NodeInProcessing = InitialNode;
+            VisitedStates = 1;
+            ExploredStates = new Dictionary<string, int>();
         }
 
         #endregion
@@ -44,14 +51,52 @@ namespace Solvers
             foreach (var possibleMove in possibleMoves)
             {
                 Node newNode = new Node(DimX, DimY, NodeInProcessing.MoveEmptyTile(possibleMove),
-                    possibleMove, NodeInProcessing, NodeInProcessing.DepthLevel);
+                    possibleMove, NodeInProcessing, NodeInProcessing.DepthLevel + 1);
                 AddNode(newNode);
+                if (!ExploredStates.ContainsKey(newNode.ToString()) ||
+                    ExploredStates[newNode.ToString()] > newNode.DepthLevel)
+                {
+                    AddNode(newNode);
+                    VisitedStates++;
+                }
             }
         }
 
-        private void Solve()
+        public void Solve()
         {
-            throw new NotImplementedException();
+            Stopwatch time = new Stopwatch();
+            time.Start();
+            while (GetNodesInContainer() > 0)
+            {
+                NodeInProcessing = GetNode();
+                if (!ExploredStates.ContainsKey(NodeInProcessing.ToString()))
+                {
+                    ExploredStates.Add(NodeInProcessing.ToString(), NodeInProcessing.DepthLevel);
+                }
+                else if (NodeInProcessing.DepthLevel < ExploredStates[NodeInProcessing.ToString()])
+                {
+                    ExploredStates[NodeInProcessing.ToString()] = NodeInProcessing.DepthLevel;
+                }
+
+                if (NodeInProcessing.DepthLevel > DeepestRecursion)
+                {
+                    DeepestRecursion = NodeInProcessing.DepthLevel;
+                }
+
+                if (NodeInProcessing.IsSolved())
+                {
+                    time.Stop();
+                    SolutionInfo solution = new SolutionInfo()
+                    {
+                        Steps = 
+
+                    };
+                    DataWriter.WriteSolution(WritePaths.SolutionFilePath,);
+                }
+
+
+
+            }
         }
 
         protected abstract bool IsMovePossible();

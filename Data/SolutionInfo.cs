@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Data
 {
-    public static class SolutionInfo
+    public class SolutionInfo
     {
-        public static int SolutionLength { get; set; }
-        public static int StatesVisited { get; set; }
-        public static int StatesProcessed { get; set; }
-        public static int DeepestRecursionReached { get; set; }
-        public static double ProcessingTime { get; set; }
+        public string Steps { get; set; }
+        public  int Length { get; set; }
+        public  int StatesVisited { get; set; }
+        public  int StatesProcessed { get; set; }
+        public  int DeepestRecursionReached { get; set; }
+        public Stopwatch ProcessingTime { get; set; }
     }
 }

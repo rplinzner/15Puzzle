@@ -148,8 +148,13 @@ namespace Solvers
             {
                 return path;
             }
-            path += Parent.GetSolutionPath() + PreviousMove;
+            path += Parent.GetSolutionPath() + PreviousMove.ToString()[0];
             return path;
+        }
+
+        public override string ToString()
+        {
+            return string.Join(",", Board);
         }
 
         #endregion
