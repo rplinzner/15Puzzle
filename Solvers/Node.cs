@@ -40,7 +40,7 @@ namespace Solvers
         {
             List<MoveEnum> possibleMoves = new List<MoveEnum>();
             int blankIndexX = GetBlankTile() % DimX;
-            int blankIndexY = GetBlankTile() / DimY;
+            int blankIndexY = (GetBlankTile() - blankIndexX) / DimY;
             //Check For L Move
             if (blankIndexX > 0 && PreviousMove != MoveEnum.R)
             {
@@ -101,7 +101,7 @@ namespace Solvers
                 Swap(ref board[BlankTileIndex - DimX], ref board[BlankTileIndex]);
             }
 
-            if (move == MoveEnum.U)
+            if (move == MoveEnum.D)
             {
                 Swap(ref board[BlankTileIndex + DimX], ref board[BlankTileIndex]);
             }

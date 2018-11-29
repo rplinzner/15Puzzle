@@ -15,7 +15,7 @@ namespace Solvers
         public BfsSolver(string moveOrder, NodeDTO nodeData, WritePathDTO writeData) : base(nodeData,writeData)
         {
             MoveOrder = SolverHelp.ConvertStringMovesToEnums(moveOrder);
-            AddNode(InitialNode);
+            Nodes.Enqueue(InitialNode);
         }
         #endregion
 

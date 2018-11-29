@@ -1,4 +1,5 @@
-﻿using Data;
+﻿using System;
+using Data;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -52,7 +53,7 @@ namespace Solvers
             {
                 Node newNode = new Node(DimX, DimY, NodeInProcessing.MoveEmptyTile(possibleMove),
                     possibleMove, NodeInProcessing, NodeInProcessing.DepthLevel + 1);
-                AddNode(newNode);
+
                 if (!ExploredStates.ContainsKey(newNode.ToString()) ||
                     ExploredStates[newNode.ToString()] > newNode.DepthLevel)
                 {
@@ -64,6 +65,8 @@ namespace Solvers
 
         public void Solve()
         {
+            Console.Out.WriteLine("Starting Computing");
+            Console.Out.WriteLine(WritePaths.SolutionFilePath);
             Stopwatch time = new Stopwatch();
             time.Start();
             while (GetNodesInContainer() > 0)
@@ -88,13 +91,22 @@ namespace Solvers
                     time.Stop();
                     SolutionInfo solution = new SolutionInfo()
                     {
-                        Steps = 
-
+                        Steps = NodeInProcessing.GetSolutionPath(),
+                        Length = NodeInProcessing.DepthLevel,
+                        DeepestRecursionReached = DeepestRecursion,
+                        ProcessingTime = time,
+                        StatesProcessed = ExploredStates.Count,
+                        StatesVisited = VisitedStates
+                       
                     };
-                    DataWriter.WriteSolution(WritePaths.SolutionFilePath,);
+                    DataWriter.WriteSolution(WritePaths.SolutionFilePath,solution);
+                    DataWriter.WriteInfo(WritePaths.InfoFilePath, solution);
+                    
+                    Console.Out.WriteLine("Computing Complete, time: " + time.Elapsed.Milliseconds.ToString("F3") + "ms");
+                    return;
                 }
 
-
+                AddChildren();
 
             }
         }

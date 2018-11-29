@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace Data
 {
@@ -8,19 +9,20 @@ namespace Data
         {
             using (StreamReader sr = new StreamReader(filepath))
             {
-                string[] diemensions = sr.ReadLine()?.Split(' ');
-                byte x = byte.Parse(diemensions[0]);
-                byte y = byte.Parse(diemensions[1]);
+                string[] dimensions = sr.ReadLine()?.Split(' ', '\r', '\n');
+                byte x = byte.Parse(dimensions[0]);
+                byte y = byte.Parse(dimensions[1]);
 
                 byte[] board = new byte[x * y];
                 for (int i = 0; i < y; i++)
                 {
-                    string[] line = sr.ReadLine()?.Split(' ');
+                    string[] line = sr.ReadLine()?.Split(' ', '\r', '\n');
                     for (int j = 0; j < x; j++)
                     {
                         board[i * x + j] = byte.Parse(line[j]);
                     }
                 }
+
                 return new NodeDTO()
                 {
                     Board = board,

@@ -59,7 +59,7 @@ namespace ConsoleApp
                     solver = new BfsSolver(_strategy, _startingNode, _paths);
                     break;
                 case "dfs":
-                    solver = new BfsSolver(_strategy, _startingNode, _paths);
+                    solver = new DfsSolver(_strategy, _startingNode, _paths);
                     break;
                 case "astr":
                     if (_strategy == "hamm")

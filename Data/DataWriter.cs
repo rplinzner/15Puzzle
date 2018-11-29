@@ -15,10 +15,7 @@ namespace Data
                     return;
                 }
 
-                for (int i = 0; i < solutionLength; i++)
-                {
-                    sw.Write(solution.Steps);
-                }
+                sw.Write(solution.Steps);
             }
         }
 
