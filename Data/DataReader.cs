@@ -10,8 +10,8 @@ namespace Data
             using (StreamReader sr = new StreamReader(filepath))
             {
                 string[] dimensions = sr.ReadLine()?.Split(' ', '\r', '\n');
-                byte x = byte.Parse(dimensions[0]);
-                byte y = byte.Parse(dimensions[1]);
+                byte y = byte.Parse(dimensions[0]);
+                byte x = byte.Parse(dimensions[1]);
 
                 byte[] board = new byte[x * y];
                 for (int i = 0; i < y; i++)
