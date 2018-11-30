@@ -102,7 +102,7 @@ namespace Solvers
                     DataWriter.WriteSolution(WritePaths.SolutionFilePath,solution);
                     DataWriter.WriteInfo(WritePaths.InfoFilePath, solution);
                     
-                    Console.Out.WriteLine("Computing Complete, time: " + time.Elapsed.Milliseconds.ToString("F3") + "ms");
+                    Console.Out.WriteLine("Computing Complete, time: " + time.Elapsed.TotalMilliseconds.ToString("F3") + "ms");
                     return;
                 }
 
