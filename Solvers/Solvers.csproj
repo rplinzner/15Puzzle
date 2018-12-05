@@ -48,6 +48,8 @@
     <Compile Include="AStarSolver.cs" />
     <Compile Include="BfsSolver.cs" />
     <Compile Include="DfsSolver.cs" />
+    <Compile Include="Enums\GreedyHeuresticEnum.cs" />
+    <Compile Include="GreedySolver.cs" />
     <Compile Include="SolverBase.cs" />
     <Compile Include="Enums\MoveEnum.cs" />
     <Compile Include="Node.cs" />

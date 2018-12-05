@@ -71,6 +71,16 @@ namespace ConsoleApp
                         solver = new AStarSolver(_startingNode, _paths, AStarHeuresticEnum.Manhattan);
                     }
                     break;
+                case "greedy":
+                    if (_strategy == "diag")
+                    {
+                        solver = new GreedySolver(_startingNode, _paths, GreedyHeuresticEnum.Diagonal);
+                    }
+                    else
+                    {
+                        solver = new GreedySolver(_startingNode, _paths, GreedyHeuresticEnum.Euclides);
+                    }
+                    break;
                 
                 default:
                     solver = new AStarSolver(_startingNode, _paths, AStarHeuresticEnum.Manhattan);
