@@ -68,7 +68,7 @@ namespace Solvers
                         double y = (value - 1 - x) / dimX;
                         x = Math.Abs(x - j);
                         y = Math.Abs(y - i);
-                        distance = Math.Max(x, y);
+                        distance += Math.Max(x, y);
                     }
                 }
             }
@@ -94,7 +94,7 @@ namespace Solvers
                         x = Math.Pow((x - j),2);
                         y = Math.Pow((y - i),2);
                         distance = x+y;
-                        distance = Math.Sqrt(distance);
+                        distance += Math.Sqrt(distance);
                     }
                 }
             }
