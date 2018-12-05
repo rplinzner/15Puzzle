@@ -80,6 +80,7 @@ namespace Solvers
         {
             byte[] board = node.Board;
             double distance = 0;
+            double temp;
             byte dimX = node.DimX;
             byte dimY = node.DimY;
             for (int i = 0; i < dimY; i++)
@@ -93,8 +94,8 @@ namespace Solvers
                         double y = (value - 1 - x) / dimX;
                         x = Math.Pow((x - j),2);
                         y = Math.Pow((y - i),2);
-                        distance = x+y;
-                        distance += Math.Sqrt(distance);
+                        temp = x+y;
+                        distance += Math.Sqrt(temp);
                     }
                 }
             }
